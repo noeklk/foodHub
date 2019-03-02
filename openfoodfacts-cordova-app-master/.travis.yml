@@ -1,0 +1,38 @@
+language: android
+sudo: required
+node_js:
+  - "lts/*"
+jdk:
+  - oraclejdk8
+
+android:
+  components:
+    - build-tools-26.0.2
+    - android-26
+notifications:
+  slack: openfoodfacts:pRddUFWA1nqbJ03sffyEzo18
+
+branches:
+  only:
+  - master
+
+install:
+  - sudo apt-get update
+  - sudo apt-get install --only-upgrade -y oracle-java8-installer
+  - curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
+  - sudo apt-get install -y nodejs
+  - npm cache clean
+  - npm install
+  - sudo npm install -g cordova
+  - echo y | android update sdk -u --filter android-22,android-23,android-24
+
+before_script:
+  - cordova platform rm android
+  - cordova platform add android
+
+script:
+  - cordova prepare
+  - cordova build android --release -- --ant
+  
+release:
+  - exit 0  
