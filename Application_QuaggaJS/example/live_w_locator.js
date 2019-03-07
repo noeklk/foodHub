@@ -115,10 +115,14 @@ $(function() {
 
             $(".controls .reader-config-group").on("change", "input, select", function(e) {
                 e.preventDefault();
-                var $target = $(e.target),
+
+              var $target = $(e.target),
                     value = $target.attr("type") === "checkbox" ? $target.prop("checked") : $target.val(),
                     name = $target.attr("name"),
                     state = self._convertNameToState(name);
+
+           
+                
 
                 console.log("Value of "+ state + " changed to " + value);
                 self.setState(state, value);
@@ -129,7 +133,12 @@ $(function() {
                 $ul = $("#result_strip ul.collector");
 
             results.forEach(function(result) {
-                var $li = $('<li><div class="thumbnail"><div class="imgWrapper"><img /></div><div class="caption"><h4 class="code"></h4></div></div></li>');
+                var $li = $('<li><div class="thumbnail">\
+                <div class="imgWrapper"><img /></div><div class="caption">\
+                <h4 class="code"></h4>\
+                </div>\
+                </div>\
+                </li>');
 
                 $li.find("img").attr("src", result.frame);
                 $li.find("h4.code").html(result.codeResult.code + " (" + result.codeResult.format + ")");
@@ -242,10 +251,10 @@ $(function() {
                 halfSample: true
             },
             numOfWorkers: 2,
-            frequency: 10,
+            frequency: 100,
             decoder: {
                 readers : [{
-                    format: "code_128_reader",
+                    format: "ean_reader",
                     config: {}
                 }]
             },

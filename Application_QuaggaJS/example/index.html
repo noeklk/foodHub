@@ -37,7 +37,7 @@
     <div class="container-fluid mx-auto" id="scan-row-nest">
       <div class="row">
         <div class="col-12" id="scan-row">
-          <div id="scan-1-container">
+          <div id="scan-1-container" class="hoveredbox">
             <p id="scan-text">Scanner un produit</p>
           </div>
         </div>
@@ -47,24 +47,19 @@
     <div>
 
    <section id="container" class="container">
-        <h3>The user's camera</h3>
-        <p>If your platform supports the <strong>getUserMedia</strong> API call, you can try the real-time locating and decoding features.
-            Simply allow the page to access your web-cam and point it to a barcode. You can switch between <strong>Code128</strong>
-            and <strong>EAN</strong> to test different scenarios.
-            It works best if your camera has built-in auto-focus.
-            </p>
-        <div class="controls" >
+        
+        <div class="controls" style="display:none;" >
             <fieldset class="input-group">
                 <button class="stop">Stop</button>
             </fieldset>
-            <fieldset class="reader-config-group">
+            <fieldset class="reader-config-group" style="display:none;">
                 <label>
                     <span>Barcode-Type</span> 
                     <select name="decoder_readers">
-                        <option value="code_128" selected="selected">Code 128</option>
+                        <option value="ean" selected="selected">EAN</option>
+                        <option value="code_128" >Code 128</option>
                         <option value="code_39">Code 39</option>
                         <option value="code_39_vin">Code 39 VIN</option>
-                        <option value="ean">EAN</option>
                         <option value="ean_extended">EAN-extended</option>
                         <option value="ean_8">EAN-8</option>
                         <option value="upc">UPC</option>
@@ -127,9 +122,9 @@
         </div>
       <div id="result_strip">
         <ul class="thumbnails"></ul>
-        <ul class="collector"></ul>
+        <ul class="collector" ></ul>
       </div>
-      <div id="interactive" class="viewport"></div>
+     <div id="interactive" class="viewport" style="display:none;"></div>
     </section>
     <!--////////////////////////////////////////////////////////////////////////////////////////-->
     <scripts>

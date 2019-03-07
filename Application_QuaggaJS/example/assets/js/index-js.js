@@ -19,11 +19,17 @@ function scan() {
 
   scanRow.innerHTML =
     "<div id='left-box-scan' class='container'>\
+    <div id='scan-left-container' class='hoveredbox'>\
     <h2>Insérer produit <br /> dans le frigo</h2>\
+    </div>\
     </div> \
     <div id='right-box-scan' class='container'>\
+    <div id='scan-right-container' class='hoveredbox'>\
     <h2>Nutri'Score</h2>\
-    </div> ";
+    </div>\
+    </div>";
+    document.getElementById("interactive").setAttribute("style", "style:block;")
+
   scanRow.removeEventListener("click", scan);
 
   var scanLeftBox = document.getElementById("left-box-scan");
@@ -39,17 +45,6 @@ function scan() {
     document.getElementById("container-video").innerHTML =
       "<div id='container'> <video autoplay='true' id='videoElement'></video> </div>";
     console.log("recept click");
-    var video = document.querySelector("#videoElement");
-
-    if (navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices
-        .getUserMedia({ video: true })
-        .then(function(stream) {
-          video.srcObject = stream;
-        })
-        .catch(function(err0r) {
-          console.log("Something went wrong!");
-        });
-    }
+    
   });
 }
