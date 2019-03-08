@@ -33,6 +33,56 @@ $(function() {
                 App.attachListeners();
                 App.checkCapabilities();
                 Quagga.start();
+                Quagga.onDetected(function(result){
+
+
+                    if(result.codeResult){
+
+                        
+                        var codebar = result.codeResult.code;
+
+                        
+                        if(codebar.length == 13){
+
+                            console.log(codebar);
+                          
+                        }
+                        else{
+
+                            console.log("Erreur");
+                        }
+                    }
+
+
+      /*              Quagga.stop();
+                    console.log("TEST");
+                    resultCollector.getResults();
+                    var codebar = result.codeResult.code;
+                    console.log(codebar);
+
+
+                    var results = resultCollector.getResults();
+
+                    results.forEach(function(result) {
+
+                        var codebar = result.codeResult.code;
+                        console.log(codebar);
+                        
+                    });
+                    
+                    
+                        var results = resultCollector.getResults(),
+                            $ul = $("#result_strip ul.collector");
+            
+                        results.forEach(function(result) {
+
+                            $li.find("h4.code").html(result.codeResult.code + " (" + result.codeResult.format + ")");
+
+                            $ul.prepend($li);
+                        });
+*/
+
+                });/*jscode*/
             });
         },
         handleError: function(err) {
@@ -256,7 +306,7 @@ $(function() {
                 readers : [{
                     format: "ean_reader",
                     config: {}
-                }]
+                }]  
             },
             locate: true
         },
