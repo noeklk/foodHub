@@ -70,8 +70,16 @@ header#navbar {
   /* transition: left 0.25s ease-in-out; */
 }
 
-#nav-icon3.open {
+#nav-icon3.openM {
   transform: translateX(25px);
+}
+
+#nav-icon3.openT {
+  transform: translateX(0);
+}
+
+#nav-icon3.openS {
+  transform: translateX(0);
 }
 
 #nav-icon3 span {
@@ -183,7 +191,7 @@ header#navbar {
   background-color: grey;
 }
 
-.active-sidebar {
+.sidebar.open {
   left: 0;
 }
 
@@ -204,18 +212,9 @@ header#navbar {
   margin-left: 0px;
 }
 
-#rows-container.open {
-  margin-left: 200px;
-}
-
 .col-12 .svg-main {
   transition: margin-left 0.3s ease-in-out;
   margin-left: 0px;
-}
-
-.col-12.open .svg-main {
-  transition: margin-left 0.3s ease-in-out 0.15s;
-  margin-left: 25px;
 }
 
 .col-12 .text-main {
@@ -224,20 +223,69 @@ header#navbar {
   opacity: 1;
 }
 
-.col-12.open .text-main {
-  transition: margin-left 0.3s ease-in-out 0.15s, opacity 0.3s ease-in-out 0.15s;
-  margin-left: 45px;
-  opacity: 0;
-}
-
 .col-12 .svg-wrappers {
   transition: margin-left 0.3s ease-in-out 0.15s;
   margin-left: 0px;
 }
 
-.col-12.open .svg-wrappers {
+/*------------------ openers ------------------------------*/
+
+#rows-container.openM {
+  margin-left: 200px;
+}
+
+#rows-container.openT {
+  margin-left: 0px;
+}
+
+#rows-container.openS {
+  margin-left: 0px;
+}
+
+.col-12.openM .text-main {
+  transition: margin-left 0.3s ease-in-out 0.15s, opacity 0.3s ease-in-out 0.15s;
+  margin-left: 45px;
+  opacity: 0;
+}
+
+.col-12.openT .text-main {
+  transition: margin-left 0.3s ease-in-out;
+  margin-left: 120px;
+}
+
+.col-12.openS .text-main {
+  transition: margin-left 0.3s ease-in-out;
+  margin-left: 100px;
+}
+
+.col-12.openM .svg-main {
+  transition: margin-left 0.3s ease-in-out 0.15s;
+  margin-left: 25px;
+}
+
+.col-12.openT .svg-main {
+  transition: margin-left 0.3s ease-in-out;
+  margin-left: 160px;
+}
+
+.col-12.openS .svg-main {
+  transition: margin-left 0.3s ease-in-out;
+  margin-left: 150px;
+}
+
+.col-12.openM .svg-wrappers {
   transition: margin-left 0.3s ease-in-out 0.15s;
   margin-left: 45px;
+}
+
+.col-12.openT .svg-wrappers {
+  transition: margin-left 0.3s ease-in-out 0.15s;
+  margin-left: 160px;
+}
+
+.col-12.openS .svg-wrappers {
+  transition: margin-left 0.3s ease-in-out 0.15s;
+  margin-left: 130px;
 }
 
 /* logo */
@@ -294,7 +342,7 @@ main {
   clear: both;
   width: 100vh;
   height: 22.23vh;
-  /* height: 169.374px;*/
+  /* height: 10.25rem; */
   box-shadow: 0 4px 25px 2px rgba(0, 0, 0, 0.2);
 }
 
@@ -407,12 +455,29 @@ main {
 }
 
 /*
+For mobiles:
 [class*="col-"] {
   width: 100%;
 }
 
+
 @media only screen and (min-width: 600px) {
-   For tablets: 
+  .text-main {
+    letter-spacing: 5px !important;
+    font-size: 32px !important;
+  }
+
+  .col-12 .text-main {
+    transition: margin-left 0.3s ease-in-out !important;
+    margin-left: 0px !important;
+  }
+
+  .col-12.openM .text-main {
+    margin-left: 45px !important;
+  }
+
+  
+   For tablets:
   .col-s-1 {width: 8.33%;}
   .col-s-2 {width: 16.66%;}
   .col-s-3 {width: 25%;}
@@ -425,7 +490,10 @@ main {
   .col-s-10 {width: 83.33%;}
   .col-s-11 {width: 91.66%;}
   .col-s-12 {width: 100%;}
+  
 }
+
+
 @media only screen and (min-width: 768px) {
    For desktop:
   .col-1 {width: 8.33%;}

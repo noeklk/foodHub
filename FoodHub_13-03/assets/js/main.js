@@ -395,15 +395,41 @@ $(document).ready(function() {
     }
   });
 
+  var openers = $("#rows-container,.col-12,.sidebar,#nav-icon3");
+  //Resize listener
+
+  $(window).resize(function() {
+    openers.removeClass("open openM openT openS");
+  });
+
   //Bouton de navigation
 
   $("#nav-icon3").click(function(e) {
     e.preventDefault();
     res = false;
-    $(this).toggleClass("open");
-    $("#rows-container").toggleClass("open");
-    $(".col-12").toggleClass("open");
-    $(".sidebar").toggleClass("active-sidebar");
+    function mobile() {
+      openers.removeClass("openT openS");
+      openers.toggleClass("open openM");
+    }
+    function tablet() {
+      openers.removeClass("openM openS");
+      openers.toggleClass("open openT");
+    }
+    function screen() {
+      openers.removeClass(" openM openT");
+      openers.toggleClass("open openS");
+    }
+
+    if ("matchMedia" in window) {
+      // Détection
+      if (window.matchMedia("(min-width:1024px)").matches) {
+        screen();
+      } else if (window.matchMedia("(min-width:600px)").matches) {
+        tablet();
+      } else {
+        mobile();
+      }
+    }
   });
 
   //Boutons pour applications
@@ -413,8 +439,8 @@ $(document).ready(function() {
     .click(function(e) {
       e.preventDefault();
       res = false;
-      $("#nav-icon3, #rows-container, .col-12").removeClass("open");
-      $(".sidebar").removeClass("active-sidebar");
+      $("#nav-icon3, #rows-container, .col-12").removeClass("open openM openS");
+      $(".sidebar").removeClass("open openM openS");
       $("#scan-row,#frigo-stream-row,#listes-row,#recettes-row").fadeOut(
         "fast"
       );
