@@ -1,0 +1,9 @@
+﻿11/03
+Done : svg, animation, sidebar, home button;
+
+12/03
+Done : faire apparaitre et glisser seulement
+les main-SVG's à l'apparition de la sidebar, codebar API;
+
+Todo : 
+Add FA to sidebars li;
