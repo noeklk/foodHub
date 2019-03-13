@@ -58,7 +58,7 @@ header#navbar {
 }
 
 #nav-icon3 {
-  width: 55px !important;
+  width: 56px !important;
   height: 52px !important;
   position: relative !important;
   margin: 50px auto !important;
@@ -98,7 +98,7 @@ header#navbar {
     width 0.25s ease-in-out, left 0.25s ease-in-out;
   transition: transform 0.25s ease-in-out, top 0.25s ease-in-out,
     width 0.25s ease-in-out, left 0.25s ease-in-out,
-    border-color 0.1s 0.1s ease-in-out;
+    border-color 0.1s 0.1s ease-in-out, opacity 0.1s 0.1s ease-in-out;
 }
 
 #nav-icon3 span:nth-child(1) {
@@ -143,6 +143,7 @@ header#navbar {
 #nav-icon3.open span:nth-child(4),
 #nav-icon3.open span:nth-child(1) {
   border-color: #fff;
+  opacity: 0;
 }
 
 /* sidebar */
@@ -160,7 +161,7 @@ header#navbar {
 .sidebar ul {
   margin: 0;
   padding: 20px 0;
-  margin-left: 50px;
+  margin-left: 15px;
 }
 
 .sidebar ul li {
@@ -173,15 +174,29 @@ header#navbar {
   color: #fff;
   display: block;
   text-decoration: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  font-family: Sansation, Helvetica, Arial, sans-serif;
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.2); */
+  transition: background-color 0.2s ease;
 }
 
-.sidebar ul li a:hover {
+.sidebar ul li a:active {
   background-color: grey;
 }
 
 .active-sidebar {
   left: 0;
+}
+
+.fa-setup {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.svg-inline--fa {
+  position: relative;
+  font-size: 1.8em;
+  top: 0.2em;
+  left: -0.2em;
 }
 
 #rows-container {
@@ -253,11 +268,11 @@ span#logo.ripple {
 
 @keyframes logoripple {
   from {
-    transform: scale(1.2);
+    transform: perspective(15px) translateZ(1px);
   }
 
   to {
-    transform: scale(1);
+    transform: perspective(0px) translateZ(0px);
   }
 }
 
@@ -331,7 +346,7 @@ main {
   transform: translate(-100%, -50%);
   -ms-transform: translate(-100%, -50%);
   color: #fff;
-  font-family: Sansation;
+  font-family: Sansation, Helvetica, Arial, sans-serif;
   font-weight: bold;
   letter-spacing: 0.9vw;
   font-size: 6vw;
@@ -352,7 +367,7 @@ main {
 @media (max-width: 768px) {
 }
 
-@media (max-width: 576px) {
+@media (min-width: 576px) {
 }
 
 .hvr-grow-shadow {
