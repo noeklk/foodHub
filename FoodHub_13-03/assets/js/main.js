@@ -160,7 +160,7 @@ $(document).ready(function() {
         });
       });
     },
-    _printCollectedResults: function() {
+    /*_printCollectedResults: function() {
       var results = resultCollector.getResults(),
         $ul = $("#result_strip ul.collector");
 
@@ -175,7 +175,7 @@ $(document).ready(function() {
           .html(result.codeResult.code + " (" + result.codeResult.format + ")");
         $ul.prepend($li);
       });
-    },
+    }*/
     _accessByPath: function(obj, path, val) {
       var parts = path.split("."),
         depth = parts.length,
@@ -277,7 +277,7 @@ $(document).ready(function() {
         halfSample: true
       },
       numOfWorkers: 4,
-      frequency: 50,
+      frequency: 100,
       decoder: {
         readers: [
           {
@@ -333,89 +333,97 @@ $(document).ready(function() {
     }
   });
 
-
-var requestURL;
-var resultStatus = false;
-var lastResult = "";
-
+  var requestURL;
+  var resultStatus = false;
+  var lastResult = "";
+  var verif = "";
 
   Quagga.onDetected(function(result) {
     var code = result.codeResult.code;
 
-     if (App.lastResult !== code) {
-  
-       App.lastResult = code;
-    
+    if (App.lastResult !== code) {
+      App.lastResult = code;
 
-
-      requestURL = 'https://ssl-api.openfoodfacts.org/api/v0/product/';
-            //Mettre code de reception du code barre ici
-      requestURL += code +".json";
+      requestURL = "https://ssl-api.openfoodfacts.org/api/v0/product/";
+      //Mettre code de reception du code barre ici
+      requestURL += code + ".json";
       console.log(requestURL);
 
       var request = new XMLHttpRequest();
-            request.open('GET', requestURL);
-            request.onload = function(){
-                var data = JSON.parse(request.responseText);
-                console.log(data);
-                affichage(data);
-            };
-            request.send();
+      request.open("GET", requestURL);
+      request.onload = function() {
+        var data = JSON.parse(request.responseText);
+        console.log(data);
+        affichage(data);
+      };
+      request.send();
 
-            //Fonction d'affichage des données du produit recherché
-            function affichage(donnees){
-                var code = donnees.code;
-                console.log("code = " + code);
-                resultStatus = donnees['status'];
+      //Fonction d'affichage des données du produit recherché
+      function affichage(donnees) {
+        var code = donnees.code;
+        console.log("code = " + code);
+        resultStatus = donnees["status"];
 
-              if (lastResult !== code && resultStatus == 1 && donnees['status_verbose'] == "product found"){
+        if (
+          lastResult !== code &&
+          resultStatus == 1 &&
+          donnees["status_verbose"] == "product found" &&
+          verif !== idItem
+        ) {
+          $("#prodname").addClass("on");
 
+          // $("#prodname").empty();
 
-                  $("#prodname").addClass("on");
-                  lastResult = code;
-               
-                  
-                console.log(lastResult);
-                
-                var string = "";
-                var prod = donnees['product'];
-                
-                var indice = prod.nutrition_grade_fr;
-                indice = indice.toUpperCase();
-                var allerg = prod.allergens;
-                var brand = prod.brands_tags[0];
+          lastResult = code;
 
-                console.log(prod);
-                console.log(prod.product_name);
-                string +="<div id='text'>";
-                string += "<h1>" + prod.product_name + "LOL:" + brand +"</h1><br>";
-                string +="<div id='desc'>";
-                string += "<p><strong>Catégorie:</strong> " + prod.categories + "<p><br>";
-                string += "<p><strong>Code barre: </strong>" + code + "</p><br>";
-                string +="<p>Indice de qualité : " + indice + "</p>";
-                string += "<p><strong>Ingrédients: </strong>" + prod.ingredients_text_fr+ "</p><br>";
-                if (allerg){
-                    string += "<p><strong>Allergènes ou intolérances: </strong>" + allerg + "</p><br>";
-                  }
-                string +="</div>";
-                //string += "<p><strong>Nutriscore: </strong>" +prod.nutrition_grade_fr+ "</p>";
-                string +="</div>";
-                $('#prodname').append('<img class="img" src="' + prod.image_url+ '" />');
-                $('#prodname').append(string);
-                
-                   
-            }
-            else{
+          console.log(lastResult);
 
-              console.log("Répétition ! : Annulé")
-            }
+          var string = "";
+          var prod = donnees["product"];
+
+          var indice = prod.nutrition_grade_fr;
+          indice = indice.toUpperCase();
+          var allerg = prod.allergens;
+          var brand = prod.brands_tags[0];
+          var idItem = prod.id;
+          verif = idItem;
+          console.log([`image random : ${idItem}`]);
+          console.log(prod);
+          console.log(prod.product_name);
+          string += [`<div id='text'>`];
+          string += [`<h1>${prod.product_name}</h1>`];
+          string += [`<p>${brand}</p><br />`];
+          string += [`</div>`];
+          string += [`<div id="desc">`];
+          string += [`<p><strong>Catégorie:</strong> ${prod.categories}<p>`];
+          string += [`<p><strong>Code barre: </strong> ${code}</p>`];
+          string += [`<p>Indice de qualité : <span>${indice}</span></p>`];
+          string += [
+            `<p><strong>Ingrédients:</strong> ${
+              prod.ingredients_text_fr
+            }</p><br />`
+          ];
+          if (allerg) {
+            string += [
+              `<p><strong>Allergènes ou intolérances:</strong> ${allerg}</p><br />`
+            ];
           }
-     }
-       
+          string += [`</div>`];
+
+          var imgArticle = [`<img class="img" src="${prod.image_url}" />`];
+          $("#prodname").html(imgArticle + string);
+
+          // $("#desc span").css("background-color", "red");
+        } else {
+          console.log("Répétition ! : Annulé");
+        }
+      }
+    }
   });
-    
 
-
+  $("#prodname").click(function() {
+    $("#prodname").toggleClass("up");
+  });
 
   var res = false;
 
@@ -426,6 +434,9 @@ var lastResult = "";
 
     if (res == false) {
       res = true;
+      verif = true;
+      lastResult = "";
+      idItem = "";
 
       $("span#logo")
         .addClass("ripple")
@@ -447,8 +458,8 @@ var lastResult = "";
 
       $("#listes-row").fadeIn(400);
 
-      $(".viewport,#code,#prodname").removeClass("on");
- ;
+      $(".viewport,#prodname").removeClass("on");
+      $("#prodname").empty();
       Quagga.stop();
     }
   });
@@ -503,7 +514,7 @@ var lastResult = "";
         "fast"
       );
       $(".viewport").addClass("on");
-      
+
       App.init();
     });
 
