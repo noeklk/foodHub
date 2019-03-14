@@ -342,6 +342,7 @@ main {
   clear: both;
   width: 100vh;
   height: 22.23vh;
+  cursor:pointer;
   /* height: 10.25rem; */
   box-shadow: 0 4px 25px 2px rgba(0, 0, 0, 0.2);
 }
@@ -452,6 +453,56 @@ main {
   z-index: 1;
   top: 50%;
   position: relative;
+}
+
+#prodname{
+  display: none;
+  
+}
+
+#prodname.on .img{
+  position:relative;
+  width : 50px;
+  float:left;
+  left :10%;
+  top : 5%;
+  
+}
+
+#prodname.on h1 {
+height : auto;
+margin: auto;
+}
+
+#prodname.on #desc {
+  margin-top : -20px;
+}
+
+
+
+#prodname.on #text {
+  position:relative;
+  color : #000;
+  width : 250px;
+  float:right;
+  right :10%;
+  top : 5%;
+}
+
+#prodname.on{
+  display:block;
+  font-size : 16px;
+  color: #EEE;
+  background-color: #dbdbdb;
+  border-radius : 3%;
+  border : 0;
+  top: 50%;
+  position:fixed;
+  left : 0%;
+  top : 75%;
+  z-index: 5;
+  height : 375px;
+  width : 100vw;
 }
 
 /*

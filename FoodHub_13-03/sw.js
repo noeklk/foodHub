@@ -3,7 +3,12 @@ const staticAssets = [
   "./assets/css/main.css",
   "./assets/js/main.js",
   "./assets/css/styles.css",
-  "./assets/js/jquery-3.3.1.min.js"
+  "./assets/js/jquery-3.3.1.min.js",
+  ".assets/fonts/Sansation_Regular.ttf",
+  ".assets/fonts/Sansation_Bold.ttf",
+  "./assets/css/all.min.css",
+  "./assets/css/bootstrap.min.css",
+  "./assets/js/poppers.min.js"
 ];
 
 self.addEventListener("install", async event => {

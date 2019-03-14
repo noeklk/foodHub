@@ -276,7 +276,7 @@ $(document).ready(function() {
         patchSize: "medium",
         halfSample: true
       },
-      numOfWorkers: 2,
+      numOfWorkers: 4,
       frequency: 50,
       decoder: {
         readers: [
@@ -333,31 +333,89 @@ $(document).ready(function() {
     }
   });
 
+
+var requestURL;
+var resultStatus = false;
+var lastResult = "";
+
+
   Quagga.onDetected(function(result) {
     var code = result.codeResult.code;
 
-    if (App.lastResult !== code) {
-      App.lastResult = code;
-      // var $node = null,
-      //   canvas = Quagga.canvas.dom.image;
+     if (App.lastResult !== code) {
+  
+       App.lastResult = code;
+    
 
-      console.log(code);
-      $("#code").html("code : <br />" + code);
 
-      /* $node = $(
-        '<li><div class="thumbnail">\
-        <div class="imgWrapper"><img />\
-        </div><div class="caption">\
-        <h4 class="code"></h4>\
-        </div>\
-        </div>\
-        </li>'
-      );
-      $node.find("img").attr("src", canvas.toDataURL());
-      $node.find("h4.code").html(code);
-      $("#result_strip ul.thumbnails").prepend($node);*/
-    }
+      requestURL = 'https://ssl-api.openfoodfacts.org/api/v0/product/';
+            //Mettre code de reception du code barre ici
+      requestURL += code +".json";
+      console.log(requestURL);
+
+      var request = new XMLHttpRequest();
+            request.open('GET', requestURL);
+            request.onload = function(){
+                var data = JSON.parse(request.responseText);
+                console.log(data);
+                affichage(data);
+            };
+            request.send();
+
+            //Fonction d'affichage des données du produit recherché
+            function affichage(donnees){
+                var code = donnees.code;
+                console.log("code = " + code);
+                resultStatus = donnees['status'];
+
+              if (lastResult !== code && resultStatus == 1 && donnees['status_verbose'] == "product found"){
+
+
+                  $("#prodname").addClass("on");
+                  lastResult = code;
+               
+                  
+                console.log(lastResult);
+                
+                var string = "";
+                var prod = donnees['product'];
+                
+                var indice = prod.nutrition_grade_fr;
+                indice = indice.toUpperCase();
+                var allerg = prod.allergens;
+                var brand = prod.brands_tags[0];
+
+                console.log(prod);
+                console.log(prod.product_name);
+                string +="<div id='text'>";
+                string += "<h1>" + prod.product_name + "LOL:" + brand +"</h1><br>";
+                string +="<div id='desc'>";
+                string += "<p><strong>Catégorie:</strong> " + prod.categories + "<p><br>";
+                string += "<p><strong>Code barre: </strong>" + code + "</p><br>";
+                string +="<p>Indice de qualité : " + indice + "</p>";
+                string += "<p><strong>Ingrédients: </strong>" + prod.ingredients_text_fr+ "</p><br>";
+                if (allerg){
+                    string += "<p><strong>Allergènes ou intolérances: </strong>" + allerg + "</p><br>";
+                  }
+                string +="</div>";
+                //string += "<p><strong>Nutriscore: </strong>" +prod.nutrition_grade_fr+ "</p>";
+                string +="</div>";
+                $('#prodname').append('<img class="img" src="' + prod.image_url+ '" />');
+                $('#prodname').append(string);
+                
+                   
+            }
+            else{
+
+              console.log("Répétition ! : Annulé")
+            }
+          }
+     }
+       
   });
+    
+
+
 
   var res = false;
 
@@ -389,8 +447,8 @@ $(document).ready(function() {
 
       $("#listes-row").fadeIn(400);
 
-      $(".viewport").removeClass("on");
-      $("#code").removeClass("on");
+      $(".viewport,#code,#prodname").removeClass("on");
+ ;
       Quagga.stop();
     }
   });
@@ -445,7 +503,7 @@ $(document).ready(function() {
         "fast"
       );
       $(".viewport").addClass("on");
-      $("#code").addClass("on");
+      
       App.init();
     });
 
