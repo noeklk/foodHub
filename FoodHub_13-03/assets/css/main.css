@@ -30,42 +30,45 @@
   /*font-family: Helvetica, sans-serif;*/
   padding: 0;
   margin: 0;
-  overflow: hidden;
+  overflow: hidden !important;
+  font-family: Sansation, Helvetica, Arial, sans-serif;
 }
 
+body {
+  background-color: #262626;
+
+  margin: 0;
+  min-height: 100%;
+}
 /* box-shadow-3d-card : box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); */
 
 header#navbar {
   /* navbar */
-
   width: 100%;
   height: 80px;
-  color: #fff;
   background: #40c8c2;
+  top: 0px;
+  left: 0px;
   position: fixed;
-  font-size: 20px;
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 2px 9px 1px rgba(0, 0, 0, 0.12),
     0 4px 2px -2px rgba(0, 0, 0, 0.2), inset 0 4px 5px 0 rgba(0, 0, 0, 0.14),
     inset 0 2px 9px 1px rgba(0, 0, 0, 0.12),
     inset 0 4px 2px -2px rgba(0, 0, 0, 0.2);
-
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-
   z-index: 5;
 }
 
 #nav-icon3 {
   width: 56px !important;
   height: 52px !important;
-  position: relative !important;
+  position: absolute !important;
   margin: 50px auto !important;
+  z-index: 6;
+
   cursor: pointer;
   /* transform: translate(-15rem, -1.8rem); */
   top: -32px !important;
-  left: -36% !important;
+  /* left: -36% !important; */
+  left: 32px;
   transition: transform 0.3s ease-in-out;
   /* transition: left 0.25s ease-in-out; */
 }
@@ -154,6 +157,42 @@ header#navbar {
   opacity: 0;
 }
 
+/* logo */
+
+span#logo {
+  cursor: pointer;
+  z-index: 6;
+  width: auto;
+  height: auto;
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  top: 18px;
+  right: 50px;
+}
+
+span#logo img {
+  -webkit-transition: opacity 300ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: opacity 300ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  width: 48px;
+  height: 48px;
+  opacity: 1;
+}
+
+span#logo.ripple {
+  animation: logoripple 0.5s forwards;
+}
+
+@keyframes logoripple {
+  from {
+    transform: perspective(15px) translateZ(1px);
+  }
+
+  to {
+    transform: perspective(0px) translateZ(0px);
+  }
+}
+
 /* sidebar */
 .sidebar {
   position: fixed;
@@ -207,28 +246,18 @@ header#navbar {
   left: -0.2em;
 }
 
-#rows-container {
+.svg-main {
   transition: margin-left 0.3s ease-in-out;
   margin-left: 0px;
 }
 
-.col-12 .svg-main {
-  transition: margin-left 0.3s ease-in-out;
-  margin-left: 0px;
-}
-
-.col-12 .text-main {
+.text-main {
   transition: opacity 0.3s ease-in-out, margin-left 0.3s ease-in-out;
   margin-left: 0px;
   opacity: 1;
 }
 
-.col-12 .svg-wrappers {
-  transition: margin-left 0.3s ease-in-out 0.15s;
-  margin-left: 0px;
-}
-
-/*------------------ openers ------------------------------*/
+/*----------------- openers ------------------------------*/
 
 #rows-container.openM {
   margin-left: 200px;
@@ -242,96 +271,52 @@ header#navbar {
   margin-left: 0px;
 }
 
-.col-12.openM .text-main {
+.openM .text-main {
   transition: margin-left 0.3s ease-in-out 0.15s, opacity 0.3s ease-in-out 0.15s;
   margin-left: 45px;
   opacity: 0;
 }
 
-.col-12.openT .text-main {
+.openT .text-main {
   transition: margin-left 0.3s ease-in-out;
   margin-left: 120px;
 }
 
-.col-12.openS .text-main {
+.openS .text-main {
   transition: margin-left 0.3s ease-in-out;
   margin-left: 100px;
 }
 
-.col-12.openM .svg-main {
+.openM .svg-main {
   transition: margin-left 0.3s ease-in-out 0.15s;
   margin-left: 25px;
 }
 
-.col-12.openT .svg-main {
+.openT .svg-main {
   transition: margin-left 0.3s ease-in-out;
   margin-left: 160px;
 }
 
-.col-12.openS .svg-main {
+.openS .svg-main {
   transition: margin-left 0.3s ease-in-out;
   margin-left: 150px;
 }
 
-.col-12.openM .svg-wrappers {
-  transition: margin-left 0.3s ease-in-out 0.15s;
-  margin-left: 45px;
+main {
+  margin-top: 80px;
+  position: absolute;
+  width: 100vw;
+  min-height: 100%;
 }
 
-.col-12.openT .svg-wrappers {
-  transition: margin-left 0.3s ease-in-out 0.15s;
-  margin-left: 160px;
-}
-
-.col-12.openS .svg-wrappers {
-  transition: margin-left 0.3s ease-in-out 0.15s;
-  margin-left: 130px;
-}
-
-/* logo */
-
-span#logo {
-  cursor: pointer;
-
+#rows-container {
+  position: absolute;
+  transition: margin-left 0.3s ease-in-out;
+  margin-left: 0px;
   width: auto;
   height: auto;
-  position: absolute;
   margin: 0;
   padding: 0;
-  top: 18px;
-  left: 80%;
-}
-
-span#logo img {
-  -webkit-transition: opacity 300ms cubic-bezier(0.165, 0.84, 0.44, 1);
-  transition: opacity 300ms cubic-bezier(0.165, 0.84, 0.44, 1);
-  width: 48px;
-  height: 48px;
-  opacity: 1;
-}
-
-span#logo.ripple {
-  animation: logoripple 0.5s forwards;
-}
-
-@keyframes logoripple {
-  from {
-    transform: perspective(15px) translateZ(1px);
-  }
-
-  to {
-    transform: perspective(0px) translateZ(0px);
-  }
-}
-
-main {
-  position: relative;
-  padding-top: 80px;
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  height: 100%;
 }
 
 #scan-row,
@@ -340,8 +325,10 @@ main {
 #listes-row {
   position: relative;
   clear: both;
-  width: 100vh;
-  height: 22.23vh;
+  width: 100vw;
+  height: 22.3vh;
+  /* height: 10.25em; */
+
   cursor: pointer;
   /* height: 10.25rem; */
   box-shadow: 0 4px 25px 2px rgba(0, 0, 0, 0.2);
@@ -368,17 +355,6 @@ main {
 }
 
 .svg-main {
-  position: absolute;
-  height: 20vh;
-  width: 20vw;
-  top: 50%;
-  left: 11%;
-  transform: translate(-11%, -50%);
-  -ms-transform: translate(-11%, -50%);
-}
-
-.svg-wrappers {
-  z-index: 1;
   position: absolute;
   height: 20vh;
   width: 20vw;
@@ -447,7 +423,7 @@ main {
 #prodname {
   display: none;
   top: 90%;
-   transition: transform 0.5s ease-in-out;  
+  transition: transform 0.5s ease-in-out;
   font-size: 16px;
   background-color: #dbdbdb;
   border-radius: 3%;
@@ -456,7 +432,7 @@ main {
 
   z-index: 5;
   position: fixed;
-  opacity : 0;
+  opacity: 0;
   height: 850px;
   width: 100vw;
   /* transition: top 0.3s ease-in;  */
@@ -465,10 +441,9 @@ main {
 
 #prodname.on {
   display: block;
-  
+
   /* animation: prodShow 1s ease-in 1 forwards; */
-   
-} 
+}
 
 /* @keyframes prodShow {
     from{
@@ -482,39 +457,38 @@ main {
 } */
 
 #prodname.on.up {
-  
   /* top : 25% !important; */
-  transform : translateY(-55%) !important;
+  transform: translateY(-55%) !important;
   /* animation: prodUp 5s ease-in-out 1 forwards; */
-
-
 }
-
 
 #prodname .img {
   position: relative;
   width: 50px;
+  height: auto;
   float: left;
   left: 10%;
   top: 20px;
-  
 }
 
 #prodname #desc {
-  position: relative;
+  position: absolute;
   clear: both;
-  background-color : #EEE;
-  left : 10%;
-  border-radius : 5%;
-  top : 10%;
+  background-color: #eee;
+
+  border-radius: 5%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 80%;
+  font-size: 20px;
   text-align: center;
   color: #000;
 }
 
 #prodname #text {
   position: relative;
-  
+
   color: #000;
   width: 250px;
   float: right;
@@ -522,56 +496,55 @@ main {
   top: 20px;
 }
 
-#prodname > #text > h1{
+#prodname > #text > h1 {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-weight: bold;
+  position: relative;
 
-  width : 100%;
-  padding : 0;
-  margin : 0;
+  text-align: center;
 }
 
-#prodname > #text > #brand-inline{
-
-  width : 170px;
+#prodname > #text > #brand-inline {
+  width: 170px;
   background-color: white;
-  border-radius : 10px 5px 10px 5px;
+  border-radius: 10px 5px 10px 5px;
   padding: 0;
   margin: 0;
-  position:relative;
-  left : 50px;
-  margin-top : 10px;
-  
+  left: 50%;
+  transform: translateX(-50%);
+
+  position: relative;
+
+  margin-top: 10px;
 }
 
-#prodname > #text > #brand-inline > #brand{
-
+#prodname > #text > #brand-inline > #brand {
   padding: 0;
   margin: 0;
-  text-align:center;
-  letter-spacing : 1px;
-  width : 100%;
-  font-size : 20px;
-  color :  #444444;
-  margin-bottom : 2px;
+  text-align: center;
+  letter-spacing: 0.8px;
+
+  width: 100%;
+  font-size: 20px;
+  color: #444444;
+  margin-bottom: 2px;
 }
 
+#prodname > #text > #brand-inline > #brand > #indice {
+  width: 10px;
+  height: 10px;
 
+  display: inline-block;
 
-#prodname > #text > #brand-inline > #brand > #indice{
+  position: relative;
 
-  width : 10px;
-  height : 10px; 
-  display:inline-block;
-  letter-spacing : 10px;
-  position:relative;
-  bottom : 2px;
-
-  border-radius : 50%;
-  border : 0;
-
-  margin : 0;
-  padding : 0;
+  border-radius: 50%;
+  border: 0;
+  margin: 0;
+  padding: 0;
 }
-
 
 /*
 For mobiles:
@@ -586,12 +559,12 @@ For mobiles:
     font-size: 32px !important;
   }
 
-  .col-12 .text-main {
+   .text-main {
     transition: margin-left 0.3s ease-in-out !important;
     margin-left: 0px !important;
   }
 
-  .col-12.openM .text-main {
+  .openM .text-main {
     margin-left: 45px !important;
   }
 
@@ -626,6 +599,6 @@ For mobiles:
   .col-9 {width: 75%;}
   .col-10 {width: 83.33%;}
   .col-11 {width: 91.66%;}
-  .col-12 {width: 100%;}
+   {width: 100%;}
 }
  */

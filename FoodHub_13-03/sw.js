@@ -9,10 +9,9 @@ const staticAssets = [
   "./assets/css/all.min.css",
   "./assets/css/bootstrap.min.css",
   "./assets/js/popper.min.js",
-  "./assets/webfonts/*",
-  "./assets/images/svg/barcode_white.svg",
-  "./assets/images/svg/refrigerator_white.svg",
-  "./assets/images/svg/shopping-list_white.svg"
+  "./assets/webfonts/fa-solid-900.woff2",
+  "./assets/webfonts/fa-regular-400.woff2",
+  "./assets/webfonts/fa-brands-400.woff2"
 ];
 
 self.addEventListener("install", async event => {

@@ -338,8 +338,8 @@ $(document).ready(function() {
   var lastResult = "";
   var verif = "";
   var idItem = "2";
-  var verif2 = "";
-  var interface_version ="";
+  // var verif2 = "";
+  // var interface_version = "";
 
   Quagga.onDetected(function(result) {
     var code = result.codeResult.code;
@@ -366,7 +366,7 @@ $(document).ready(function() {
         var code = donnees.code;
         console.log("code = " + code);
         resultStatus = donnees["status"];
-        
+
         if (
           lastResult !== code &&
           resultStatus == 1 &&
@@ -375,130 +375,113 @@ $(document).ready(function() {
           var prod = donnees["product"];
 
           idItem = prod.id;
-          interface_version = prod['interface_version_created'];
-          
-          console.log("Valide étape 1")
+          // interface_version = prod["interface_version_created"];
 
-          if (verif !== idItem && verif2 !== interface_version && prod.image_url){
+          console.log("Valide étape 1");
 
+          console.log([`OLD: ${verif} !== NEW: ${idItem}`]);
+          // console.log([`OLD: ${verif2} !== NEW: ${interface_version} `]);
+          if (
+            verif !== idItem /*&&
+            verif2 !== interface_version*/ &&
+            prod.image_url
+          ) {
+            console.log("Valide étape 2");
 
-            console.log("Valide étape 2")
-            
             console.log([`OLD: ${verif} !== NEW: ${idItem}`]);
-            console.log([`OLD: ${verif2} !== NEW: ${interface_version} `]);
+            // console.log([`OLD: ${verif2} !== NEW: ${interface_version} `]);
             verif = idItem;
-            verif2 = interface_version;  
-          $("#prodname").css({"opacity" : "0", "top" : "90%"});
+            // verif2 = interface_version;
+            $("#prodname").css({ opacity: "0", top: "90%" });
 
+            $("#prodname").addClass("on");
 
-          $("#prodname").addClass("on");
-          
-          $("#prodname").animate({
-            opacity : 1,
-            top: "75%",
+            $("#prodname").animate(
+              {
+                opacity: 1,
+                top: "75%"
+              },
+              500
+            );
 
+            // $("#prodname").empty();
 
-          }, 500);
+            lastResult = code;
 
-         
+            console.log(lastResult);
 
-          // $("#prodname").empty();
+            var string = "";
 
-          lastResult = code;
+            var indice = prod.nutrition_grade_fr;
+            indice = indice.toUpperCase();
+            var allerg = prod.allergens;
+            var brand = prod.brands_tags[0];
 
-          console.log(lastResult);
-
-          var string = "";
-          
-
-          var indice = prod.nutrition_grade_fr;
-          indice = indice.toUpperCase();
-          var allerg = prod.allergens;
-          var brand = prod.brands_tags[0];
-
-          
-          console.log(prod);
-          console.log(prod.product_name);
-          string += [`<div id='text'>`];
-          string += [`<h1>${prod.product_name}</h1>`];
-          string +=[`<div id="brand-inline">`];
-          string += [`<p id="brand">${brand} <span id="indice" /></p>`];
-          string += [` </div>`];
-          string += [`</div> <br />`];
-          string += [`<div id="desc">`];
-          string += [`<p><strong>Catégorie:</strong> ${prod.categories}<p>`];
-          string += [`<p><strong>Code barre: </strong> ${code}</p>`];
-          if (indice.length > 0){
-
-            string += [`<p>Indice de qualité : <span>${indice}</span></p>`];
-
-          }         
-          string += [
-            `<p><strong>Ingrédients:</strong> ${
-              prod.ingredients_text_fr
-            }</p><br />`
-          ];
-          if (allerg) {
+            console.log(prod);
+            console.log(prod.product_name);
+            string += [`<div id='text'>`];
+            string += [`<h1>${prod.product_name}</h1>`];
+            string += [`<div id="brand-inline">`];
+            string += [`<p id="brand">${brand} <span id="indice" /></p>`];
+            string += [` </div>`];
+            string += [`</div> <br />`];
+            string += [`<div id="desc">`];
+            string += [`<p><strong>Catégorie:</strong> ${prod.categories}<p>`];
+            string += [`<p><strong>Code barre: </strong> ${code}</p>`];
+            if (indice.length > 0) {
+              string += [`<p>Indice de qualité : <span>${indice}</span></p>`];
+            }
             string += [
-              `<p><strong>Allergènes ou intolérances:</strong> ${allerg}</p><br />`
+              `<p><strong>Ingrédients:</strong> ${prod.ingredients_text_fr}</p>`
             ];
+            if (allerg.length > 0) {
+              string += [
+                `<p><strong>Allergènes ou intolérances:</strong> ${allerg}</p><br />`
+              ];
+            }
+            string += [`</div>`];
+
+            var imgArticle = [`<img class="img" src="${prod.image_url}" />`];
+            $("#prodname").html(imgArticle + string);
+            if (indice.length > 0) {
+              switch (indice) {
+                case "A":
+                  // $("#indice").css("background-color" , "green");
+                  $("#indice").css("background-color", "#038141");
+
+                  console.log("indice == " + indice);
+                  break;
+
+                case "B":
+                  $("#indice").css("background-color", "#85BB2F");
+
+                  console.log("indice == " + indice);
+                  break;
+
+                case "C":
+                  $("#indice").css("background-color", "#FECB02");
+
+                  console.log("indice == " + indice);
+                  break;
+
+                case "D":
+                  $("#indice").css("background-color", "#EE8100");
+
+                  console.log("indice == " + indice);
+                  break;
+
+                case "E":
+                  $("#indice").css("background-color", "#E63E11");
+
+                  console.log("indice == " + indice);
+                  break;
+              }
+            }
+
+            // $("#desc span").css("background-color", "red");
+          } else {
+            console.log("Répétition ! : Annulé (verif)");
           }
-          string += [`</div>`];
-
-          var imgArticle = [`<img class="img" src="${prod.image_url}" />`];
-          $("#prodname").html(imgArticle + string);
-          if (indice.length > 0){
-          switch (indice){
-
-            case "A":
-
-              // $("#indice").css("background-color" , "green");
-              $('#indice').css("background-color", "#038141");
-
-              console.log("indice == " + indice);
-              break;
-
-            case "B":
-
-              $("#indice").css("background-color", "#85BB2F");
-
-              console.log("indice == " + indice);
-              break;
-
-            case "C":
-              $("#indice").css("background-color", "#FECB02");
-
-              console.log("indice == " + indice);
-              break;
-
-            case "D":
-
-              $("#indice").css(
-                "background-color", "#EE8100"
-              );
-
-              console.log("indice == " + indice);
-              break;
-
-            case "E":
-
-              $("#indice").css(
-                "background-color", "#E63E11"
-              );
-
-              console.log("indice == " + indice);
-              break;
-
-
-          }
-        }
-
-
-          // $("#desc span").css("background-color", "red");
-        }
-        else{
-          console.log("Répétition ! : Annulé (verif)");
-        }
         } else {
           console.log("Répétition ! : Annulé");
         }
@@ -508,7 +491,6 @@ $(document).ready(function() {
 
   $("#prodname").click(function() {
     $("#prodname").toggleClass("up");
-
   });
 
   var res = false;
@@ -523,9 +505,9 @@ $(document).ready(function() {
       verif = true;
       lastResult = "";
       idItem = "";
-      
+
       verif2 = "";
-      interface_version ="";
+      interface_version = "";
 
       $("span#logo")
         .addClass("ripple")
@@ -552,7 +534,7 @@ $(document).ready(function() {
       //   opacity : 0
 
       // });
-      $(".viewport").css({"opacity" : 0})
+      $(".viewport").css({ opacity: 0 });
       $("#prodname").empty();
       Quagga.stop();
     }
@@ -597,49 +579,50 @@ $(document).ready(function() {
 
   //Boutons pour applications
 
-  $(".svg-wrappers")
-    .parents("#scan-row")
-    .click(function(e) {
-      e.preventDefault();
-      res = false;
-      $("#nav-icon3, #rows-container, .col-12").removeClass("open openM openS");
-      $(".sidebar").removeClass("open openM openS");
-      $("#scan-row,#frigo-stream-row,#listes-row,#recettes-row").fadeOut(
-        "fast"
+  // $(".svg-wrappers")
+  //   .parents("#scan-row")$
+  $("#scan-row").click(function(e) {
+    e.preventDefault();
+    res = false;
+    $("#nav-icon3, #rows-container, .col-12").removeClass("open openM openS");
+    $(".sidebar").removeClass("open openM openS");
+    $("#scan-row,#frigo-stream-row,#listes-row,#recettes-row").fadeOut("fast");
+    $(".viewport")
+      .addClass("on")
+      .animate(
+        {
+          opacity: 1
+        },
+        3000
       );
-      $(".viewport").addClass("on").animate({
 
-        opacity : 1
+    App.init();
+  });
 
-      }, 3000);
+  // $(".svg-wrappers")
+  //   .parents("#frigo-stream-row")
+  $("#frigo-stream-row").click(function(e) {
+    e.preventDefault();
+    res = false;
 
-      App.init();
-    });
+    alert("Mon frigo");
+  });
 
-  $(".svg-wrappers")
-    .parents("#frigo-stream-row")
-    .click(function(e) {
-      e.preventDefault();
-      res = false;
+  // $(".svg-wrappers")
+  //   .parents("#recettes-row")
+  $("#recettes-row").click(function(e) {
+    e.preventDefault();
+    res = false;
 
-      alert("Mon frigo");
-    });
+    alert("Recettes");
+  });
 
-  $(".svg-wrappers")
-    .parents("#recettes-row")
-    .click(function(e) {
-      e.preventDefault();
-      res = false;
+  // $(".svg-wrappers")
+  //   .parents("#listes-row")
+  $("#listes-row").click(function(e) {
+    e.preventDefault();
+    res = false;
 
-      alert("Recettes");
-    });
-
-  $(".svg-wrappers")
-    .parents("#listes-row")
-    .click(function(e) {
-      e.preventDefault();
-      res = false;
-
-      alert("Listes de course");
-    });
+    alert("Listes de course");
+  });
 });
