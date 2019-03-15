@@ -432,6 +432,7 @@ main {
 
 .viewport {
   display: none;
+  opacity: 0;
 }
 
 .viewport.on {
@@ -446,58 +447,131 @@ main {
 #prodname {
   display: none;
   top: 90%;
-  transition: top 1s ease-in;
+   transition: transform 0.5s ease-in-out;  
+  font-size: 16px;
+  background-color: #dbdbdb;
+  border-radius: 3%;
+  border: 0;
+  color: #eee;
+
+  z-index: 5;
+  position: fixed;
+  opacity : 0;
+  height: 850px;
+  width: 100vw;
+  /* transition: top 0.3s ease-in;  */
+  left: 0%;
 }
 
 #prodname.on {
   display: block;
-  font-size: 16px;
-  color: #eee;
-  background-color: #dbdbdb;
-  border-radius: 3%;
-  border: 0;
-  position: fixed;
-  left: 0%;
-  top: 75%;
-  z-index: 5;
-  opacity: 1;
+  
+  /* animation: prodShow 1s ease-in 1 forwards; */
+   
+} 
 
-  height: 850px;
-  width: 100vw;
-  overflow-y: hidden;
-  transition: top 0.3s ease-in;
-}
+/* @keyframes prodShow {
+    from{
+      opacity : 0;
+
+    }
+    to{
+      opacity : 1;
+      transform:translateY(-15%);    
+    }
+} */
 
 #prodname.on.up {
-  top: 15%;
+  
+  /* top : 25% !important; */
+  transform : translateY(-55%) !important;
+  /* animation: prodUp 5s ease-in-out 1 forwards; */
+
+
 }
 
-#prodname.on .img {
+
+#prodname .img {
   position: relative;
   width: 50px;
   float: left;
   left: 10%;
   top: 20px;
-  border-radius: 15%;
+  
 }
 
-#prodname.on #desc {
+#prodname #desc {
   position: relative;
   clear: both;
-  margin-top: 250px;
-  width: 100%;
+  background-color : #EEE;
+  left : 10%;
+  border-radius : 5%;
+  top : 10%;
+  width: 80%;
   text-align: center;
   color: #000;
 }
 
-#prodname.on #text {
+#prodname #text {
   position: relative;
+  
   color: #000;
   width: 250px;
   float: right;
   right: 10%;
   top: 20px;
 }
+
+#prodname > #text > h1{
+
+  width : 100%;
+  padding : 0;
+  margin : 0;
+}
+
+#prodname > #text > #brand-inline{
+
+  width : 170px;
+  background-color: white;
+  border-radius : 10px 5px 10px 5px;
+  padding: 0;
+  margin: 0;
+  position:relative;
+  left : 50px;
+  margin-top : 10px;
+  
+}
+
+#prodname > #text > #brand-inline > #brand{
+
+  padding: 0;
+  margin: 0;
+  text-align:center;
+  letter-spacing : 1px;
+  width : 100%;
+  font-size : 20px;
+  color :  #444444;
+  margin-bottom : 2px;
+}
+
+
+
+#prodname > #text > #brand-inline > #brand > #indice{
+
+  width : 10px;
+  height : 10px; 
+  display:inline-block;
+  letter-spacing : 10px;
+  position:relative;
+  bottom : 2px;
+
+  border-radius : 50%;
+  border : 0;
+
+  margin : 0;
+  padding : 0;
+}
+
 
 /*
 For mobiles:

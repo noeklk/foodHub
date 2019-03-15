@@ -337,6 +337,9 @@ $(document).ready(function() {
   var resultStatus = false;
   var lastResult = "";
   var verif = "";
+  var idItem = "2";
+  var verif2 = "";
+  var interface_version ="";
 
   Quagga.onDetected(function(result) {
     var code = result.codeResult.code;
@@ -363,14 +366,41 @@ $(document).ready(function() {
         var code = donnees.code;
         console.log("code = " + code);
         resultStatus = donnees["status"];
-
+        
         if (
           lastResult !== code &&
           resultStatus == 1 &&
-          donnees["status_verbose"] == "product found" &&
-          verif !== idItem
+          donnees["status_verbose"] == "product found"
         ) {
+          var prod = donnees["product"];
+
+          idItem = prod.id;
+          interface_version = prod['interface_version_created'];
+          
+          console.log("Valide étape 1")
+
+          if (verif !== idItem && verif2 !== interface_version && prod.image_url){
+
+
+            console.log("Valide étape 2")
+            
+            console.log([`OLD: ${verif} !== NEW: ${idItem}`]);
+            console.log([`OLD: ${verif2} !== NEW: ${interface_version} `]);
+            verif = idItem;
+            verif2 = interface_version;  
+          $("#prodname").css({"opacity" : "0", "top" : "90%"});
+
+
           $("#prodname").addClass("on");
+          
+          $("#prodname").animate({
+            opacity : 1,
+            top: "75%",
+
+
+          }, 500);
+
+         
 
           // $("#prodname").empty();
 
@@ -379,25 +409,30 @@ $(document).ready(function() {
           console.log(lastResult);
 
           var string = "";
-          var prod = donnees["product"];
+          
 
           var indice = prod.nutrition_grade_fr;
           indice = indice.toUpperCase();
           var allerg = prod.allergens;
           var brand = prod.brands_tags[0];
-          var idItem = prod.id;
-          verif = idItem;
-          console.log([`image random : ${idItem}`]);
+
+          
           console.log(prod);
           console.log(prod.product_name);
           string += [`<div id='text'>`];
           string += [`<h1>${prod.product_name}</h1>`];
-          string += [`<p>${brand}</p><br />`];
-          string += [`</div>`];
+          string +=[`<div id="brand-inline">`];
+          string += [`<p id="brand">${brand} <span id="indice" /></p>`];
+          string += [` </div>`];
+          string += [`</div> <br />`];
           string += [`<div id="desc">`];
           string += [`<p><strong>Catégorie:</strong> ${prod.categories}<p>`];
           string += [`<p><strong>Code barre: </strong> ${code}</p>`];
-          string += [`<p>Indice de qualité : <span>${indice}</span></p>`];
+          if (indice.length > 0){
+
+            string += [`<p>Indice de qualité : <span>${indice}</span></p>`];
+
+          }         
           string += [
             `<p><strong>Ingrédients:</strong> ${
               prod.ingredients_text_fr
@@ -412,8 +447,58 @@ $(document).ready(function() {
 
           var imgArticle = [`<img class="img" src="${prod.image_url}" />`];
           $("#prodname").html(imgArticle + string);
+          if (indice.length > 0){
+          switch (indice){
+
+            case "A":
+
+              // $("#indice").css("background-color" , "green");
+              $('#indice').css("background-color", "#038141");
+
+              console.log("indice == " + indice);
+              break;
+
+            case "B":
+
+              $("#indice").css("background-color", "#85BB2F");
+
+              console.log("indice == " + indice);
+              break;
+
+            case "C":
+              $("#indice").css("background-color", "#FECB02");
+
+              console.log("indice == " + indice);
+              break;
+
+            case "D":
+
+              $("#indice").css(
+                "background-color", "#EE8100"
+              );
+
+              console.log("indice == " + indice);
+              break;
+
+            case "E":
+
+              $("#indice").css(
+                "background-color", "#E63E11"
+              );
+
+              console.log("indice == " + indice);
+              break;
+
+
+          }
+        }
+
 
           // $("#desc span").css("background-color", "red");
+        }
+        else{
+          console.log("Répétition ! : Annulé (verif)");
+        }
         } else {
           console.log("Répétition ! : Annulé");
         }
@@ -423,6 +508,7 @@ $(document).ready(function() {
 
   $("#prodname").click(function() {
     $("#prodname").toggleClass("up");
+
   });
 
   var res = false;
@@ -437,6 +523,9 @@ $(document).ready(function() {
       verif = true;
       lastResult = "";
       idItem = "";
+      
+      verif2 = "";
+      interface_version ="";
 
       $("span#logo")
         .addClass("ripple")
@@ -458,7 +547,12 @@ $(document).ready(function() {
 
       $("#listes-row").fadeIn(400);
 
-      $(".viewport,#prodname").removeClass("on");
+      $(".viewport,#prodname").removeClass("on up");
+      // $(".viewport").animate({
+      //   opacity : 0
+
+      // });
+      $(".viewport").css({"opacity" : 0})
       $("#prodname").empty();
       Quagga.stop();
     }
@@ -513,7 +607,11 @@ $(document).ready(function() {
       $("#scan-row,#frigo-stream-row,#listes-row,#recettes-row").fadeOut(
         "fast"
       );
-      $(".viewport").addClass("on");
+      $(".viewport").addClass("on").animate({
+
+        opacity : 1
+
+      }, 3000);
 
       App.init();
     });
