@@ -388,11 +388,10 @@ $(document).ready(function() {
           ) {
             console.log("Valide étape 2");
 
-            console.log([`OLD: ${verif} !== NEW: ${idItem}`]);
             // console.log([`OLD: ${verif2} !== NEW: ${interface_version} `]);
             verif = idItem;
             // verif2 = interface_version;
-
+            console.log([`OLD: ${verif} !== NEW: ${idItem}`]);
             $("#prodname").css({ opacity: "0", top: "90%" });
 
             $("#prodname").addClass("on");
@@ -546,7 +545,7 @@ $(document).ready(function() {
     openers.removeClass("open openM openT openS");
   });
 
-  //Bouton de navigation/
+  //Bouton de navigation
 
   $("#nav-icon3").click(function(e) {
     e.preventDefault();
