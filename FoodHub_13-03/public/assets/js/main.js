@@ -516,8 +516,9 @@ $(document).ready(function() {
             .dequeue();
         });
 
-      $("#nav-icon3, #rows-container, .col-12").removeClass("open");
-      $(".sidebar").removeClass("active-sidebar");
+      $("#nav-icon3, #rows-container, .col-12, .sidebar").removeClass(
+        "open openM openT openS"
+      );
 
       $("#scan-row").fadeIn(100);
 
@@ -582,8 +583,9 @@ $(document).ready(function() {
   $("#scan-row").click(function(e) {
     e.preventDefault();
     res = false;
-    $("#nav-icon3, #rows-container, .col-12").removeClass("open openM openS");
-    $(".sidebar").removeClass("open openM openS");
+    $("#nav-icon3, #rows-container, .col-12, .sidebar").removeClass(
+      "open openM openS openT"
+    );
     $("#scan-row,#frigo-stream-row,#listes-row,#recettes-row").fadeOut("fast");
     $(".viewport")
       .addClass("on")
