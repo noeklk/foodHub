@@ -546,7 +546,7 @@ $(document).ready(function() {
     openers.removeClass("open openM openT openS");
   });
 
-  //Bouton de navigation
+  //Bouton de navigation/
 
   $("#nav-icon3").click(function(e) {
     e.preventDefault();
