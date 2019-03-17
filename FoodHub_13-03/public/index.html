@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-
-<html lang="en">
+<html>
   <head>
+    <!-- update the version number as needed -->
+
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -13,19 +14,10 @@
     <link rel="icon" href="assets/images/logo.png" />
 
     <link rel="author" href="DarkArrow" />
-    <!-- <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    /> -->
+
     <!-- bootstrap -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <!-- <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
-      integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ"
-      crossorigin="anonymous"
+
     /> -->
     <!-- fa5 -->
     <link rel="stylesheet" href="assets/css/all.min.css" />
@@ -34,7 +26,6 @@
     <link rel="stylesheet" type="text/css" href="assets/css/styles.css" />
     <link rel="manifest" href="manifest.json" />
   </head>
-
   <body>
     <header id="navbar">
       <div id="nav-icon3">
@@ -395,17 +386,18 @@
           >
         </li>
         <li>
-          <a class="fa-setup" href="#"><i class="fas fa-cog"></i>Paramètres</a>
+          <a class="fa-setup" href="#"><i class="fas fa-cog"></i>Param�tres</a>
         </li>
         <li>
           <a class="fa-setup" href="#"
-            ><i class="fas fa-sign-out-alt"></i>Déconnexion</a
+            ><i class="fas fa-sign-out-alt"></i>D�connexion</a
           >
         </li>
       </ul>
     </div>
 
-    <!--////////////////////////////////////////////////////////////////////////////////////////-->
+    <script src="assets/js/firebase.js"></script>
+
     <script src="assets/js/jquery-3.3.1.min.js"></script>
     <script
       src="adapter-master/release/adapter.js"
@@ -434,5 +426,7 @@
     <script src="assets/js/all.min.js"></script>
 
     <script src="assets/js/main.js"></script>
+    <!-- INITIALIZATION -->
+    <script src="assets/js/firebase-initialization.js"></script>
   </body>
 </html>

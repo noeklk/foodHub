@@ -392,6 +392,7 @@ $(document).ready(function() {
             // console.log([`OLD: ${verif2} !== NEW: ${interface_version} `]);
             verif = idItem;
             // verif2 = interface_version;
+
             $("#prodname").css({ opacity: "0", top: "90%" });
 
             $("#prodname").addClass("on");
@@ -505,9 +506,6 @@ $(document).ready(function() {
       verif = true;
       lastResult = "";
       idItem = "";
-
-      verif2 = "";
-      interface_version = "";
 
       $("span#logo")
         .addClass("ripple")

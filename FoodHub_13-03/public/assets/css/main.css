@@ -36,9 +36,6 @@
 
 body {
   background-color: #262626;
-
-  margin: 0;
-  min-height: 100%;
 }
 /* box-shadow-3d-card : box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); */
 
@@ -206,8 +203,8 @@ span#logo.ripple {
 }
 
 .sidebar ul {
-  margin: 0;
-  padding: 20px 0;
+  margin: 0 auto;
+  padding: 20px 0 0 0;
   margin-left: 15px;
 }
 
@@ -217,7 +214,7 @@ span#logo.ripple {
 }
 
 .sidebar ul li a {
-  padding: 10px 20px;
+  padding: 10px 20px 10px 20px;
   color: #fff;
   display: block;
   text-decoration: none;
@@ -303,7 +300,7 @@ span#logo.ripple {
 }
 
 main {
-  margin-top: 80px;
+  top: 80px;
   position: absolute;
   width: 100vw;
   min-height: 100%;
