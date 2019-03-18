@@ -86,6 +86,7 @@ $(document).ready(function() {
     checkCapabilities: function() {
       var track = Quagga.CameraAccess.getActiveTrack();
       var capabilities = {};
+
       if (typeof track.getCapabilities === "function") {
         capabilities = track.getCapabilities();
       }
@@ -194,6 +195,7 @@ $(document).ready(function() {
     },
     applySetting: function(setting, value) {
       var track = Quagga.CameraAccess.getActiveTrack();
+
       if (track && typeof track.getCapabilities === "function") {
         switch (setting) {
           case "zoom":
@@ -294,8 +296,10 @@ $(document).ready(function() {
   Quagga.onProcessed(function(result) {
     var drawingCtx = Quagga.canvas.ctx.overlay,
       drawingCanvas = Quagga.canvas.dom.overlay;
+    var track = Quagga.CameraAccess.getActiveTrack();
 
     if (result) {
+      track.applyConstraints({ advanced: [{ torch: true }] });
       if (result.boxes) {
         drawingCtx.clearRect(
           0,
@@ -343,7 +347,8 @@ $(document).ready(function() {
 
   Quagga.onDetected(function(result) {
     var code = result.codeResult.code;
-
+    var track = Quagga.CameraAccess.getActiveTrack();
+    track.applyConstraints({ advanced: [{ torch: true }] });
     if (App.lastResult !== code) {
       App.lastResult = code;
 

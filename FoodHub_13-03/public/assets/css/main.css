@@ -441,13 +441,14 @@ main {
 
 #Calque_1 {
   position: fixed;
+  z-index: 5;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   background-color: #26262617;
   border-radius: 5%;
-  max-width: 90vw;
+  max-width: 85vw;
 }
 
 #prodname {
@@ -459,6 +460,7 @@ main {
   border-radius: 3%;
   border: 0;
   color: #eee;
+  overflow-y: visible;
 
   z-index: 5;
   position: fixed;
