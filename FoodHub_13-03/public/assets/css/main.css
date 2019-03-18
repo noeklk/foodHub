@@ -35,8 +35,15 @@
 }
 
 body {
-  background-color: #262626;
+  width: 100vw !important;
+  height: 100vh !important;
+  margin: 0;
+  padding: 0;
+  background-color: #034d8c;
 }
+
+/* width: 414px !important;
+  height: 736px  */
 /* box-shadow-3d-card : box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); */
 
 header#navbar {
@@ -364,15 +371,15 @@ main {
 .text-main {
   position: absolute;
   top: 50%;
-  left: 100%;
-  transform: translate(-100%, -50%);
+  left: 110%;
+  transform: translate(-110%, -50%);
   -ms-transform: translate(-100%, -50%);
   color: #fff;
   font-family: Sansation, Helvetica, Arial, sans-serif;
   font-weight: bold;
   letter-spacing: 0.9vw;
   font-size: 6vw;
-  width: 60vw;
+  width: 70vw;
   text-align: left;
 }
 
@@ -417,6 +424,17 @@ main {
   padding: 0;
 }
 
+#Calque_1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #26262617;
+  border-radius: 5%;
+  height: 200px;
+}
+
 #prodname {
   display: none;
   top: 90%;
@@ -457,6 +475,20 @@ main {
   /* top : 25% !important; */
   transform: translateY(-55%) !important;
   /* animation: prodUp 5s ease-in-out 1 forwards; */
+}
+
+@media only screen and (min-width: 600px) {
+  #prodname.on.up {
+    transform: translateY(-57%) !important;
+    height: 1200px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  #prodname.on.up {
+    transform: translateY(-55%) !important;
+    height: 1200px;
+  }
 }
 
 #prodname .img {

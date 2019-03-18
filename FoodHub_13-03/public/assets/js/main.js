@@ -500,6 +500,8 @@ $(document).ready(function() {
   $("#logo").click(function(e) {
     e.preventDefault();
 
+    $("body").css("background-color", "#034d8c");
+
     if (res == false) {
       res = true;
       verif = true;
@@ -581,6 +583,9 @@ $(document).ready(function() {
   //   .parents("#scan-row")$
   $("#scan-row").click(function(e) {
     e.preventDefault();
+
+    $("body").css("background-color", "#262626");
+
     res = false;
     $("#nav-icon3, #rows-container, .col-12, .sidebar").removeClass(
       "open openM openS openT"
@@ -592,7 +597,7 @@ $(document).ready(function() {
         {
           opacity: 1
         },
-        3000
+        2000
       );
 
     App.init();
