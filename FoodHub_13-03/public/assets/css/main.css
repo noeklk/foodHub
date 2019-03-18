@@ -177,6 +177,7 @@ span#logo {
   padding: 0;
   top: 18px;
   right: 50px;
+  transform: perspective(0px) translateZ(0px);
 }
 
 span#logo img {

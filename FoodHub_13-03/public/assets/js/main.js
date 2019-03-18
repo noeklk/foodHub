@@ -513,14 +513,13 @@ $(document).ready(function() {
       lastResult = "";
       idItem = "";
 
-      $("span#logo")
-        .addClass("ripple")
-        .delay(500)
-        .queue(function() {
-          $(this)
-            .removeClass("ripple")
-            .dequeue();
-        });
+      $("span#logo").addClass("ripple");
+
+      setTimeout(() => {
+        $("span#logo").removeClass("ripple");
+      }, 500);
+
+      // transform: perspective(15px) translateZ(1px);
 
       $("#nav-icon3, #rows-container, .col-12, .sidebar").removeClass(
         "open openM openT openS"
@@ -545,7 +544,7 @@ $(document).ready(function() {
     }
   });
 
-  var openers = $("#rows-container,.col-12,.sidebar,#nav-icon3");
+  const openers = $("#rows-container,.col-12,.sidebar,#nav-icon3");
   //Resize listener
 
   $(window).resize(function() {
@@ -557,6 +556,7 @@ $(document).ready(function() {
   $("#nav-icon3").click(function(e) {
     e.preventDefault();
     res = false;
+
     function mobile() {
       openers.removeClass("openT openS");
       openers.toggleClass("open openM");
@@ -584,8 +584,6 @@ $(document).ready(function() {
 
   //Boutons pour applications
 
-  // $(".svg-wrappers")
-  //   .parents("#scan-row")$
   $("#scan-row").click(function(e) {
     e.preventDefault();
 
@@ -608,8 +606,6 @@ $(document).ready(function() {
     App.init();
   });
 
-  // $(".svg-wrappers")
-  //   .parents("#frigo-stream-row")
   $("#frigo-stream-row").click(function(e) {
     e.preventDefault();
     res = false;
@@ -617,8 +613,6 @@ $(document).ready(function() {
     alert("Mon frigo");
   });
 
-  // $(".svg-wrappers")
-  //   .parents("#recettes-row")
   $("#recettes-row").click(function(e) {
     e.preventDefault();
     res = false;
@@ -626,8 +620,6 @@ $(document).ready(function() {
     alert("Recettes");
   });
 
-  // $(".svg-wrappers")
-  //   .parents("#listes-row")
   $("#listes-row").click(function(e) {
     e.preventDefault();
     res = false;
