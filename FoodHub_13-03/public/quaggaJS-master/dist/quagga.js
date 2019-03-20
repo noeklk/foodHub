@@ -5916,6 +5916,7 @@
         function getActiveTrack() {
           if (streamRef) {
             var tracks = streamRef.getVideoTracks();
+
             if (tracks && tracks.length) {
               return tracks[0];
             }

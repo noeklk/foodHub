@@ -5,5 +5,13 @@ Done : svg, animation, sidebar, home button;
 Done : faire apparaitre et glisser seulement
 les main-SVG's à l'apparition de la sidebar, codebar API;
 
-Todo : 
-Add FA to sidebars li;
+13/03 
+Done : Add FA to sidebars li;
+
+ Fold All folds all regions in the editor:
+
+Ctrl + K, Ctrl + 0 (zero) on Windows and Linux
+
+Unfold All unfolds all regions in the editor:
+
+Ctrl + K, Ctrl + J on Windows and Linux

@@ -77,6 +77,37 @@ $(document).ready(function() {
         //Quagga.registerResultCollector(resultCollector);
 
         App.checkCapabilities();
+
+        var track = Quagga.CameraAccess.getActiveTrack();
+        var value = false;
+        $("#flash").click(function() {
+          if (value == false) {
+            $("circle.circle").animate(
+              {
+                opacity: 0.9
+              },
+              200
+            );
+
+            track.applyConstraints({
+              advanced: [{ torch: true }]
+            });
+
+            value = true;
+          } else {
+            $("circle.circle").animate(
+              {
+                opacity: 0.5
+              },
+              200
+            );
+            track.applyConstraints({
+              advanced: [{ torch: false }]
+            });
+            value = false;
+          }
+        });
+
         Quagga.start();
       });
     },
@@ -294,12 +325,13 @@ $(document).ready(function() {
   };
 
   Quagga.onProcessed(function(result) {
-    var drawingCtx = Quagga.canvas.ctx.overlay,
-      drawingCanvas = Quagga.canvas.dom.overlay;
     var track = Quagga.CameraAccess.getActiveTrack();
 
+    var drawingCtx = Quagga.canvas.ctx.overlay,
+      drawingCanvas = Quagga.canvas.dom.overlay;
+
     if (result) {
-      track.applyConstraints({ advanced: [{ torch: true }] });
+      // track.applyConstraints({ advanced: [{ torch: true }] });
       if (result.boxes) {
         drawingCtx.clearRect(
           0,
@@ -337,18 +369,18 @@ $(document).ready(function() {
     }
   });
 
+  // track.applyConstraints({ advanced: [{ torch: false }] });
+
   var requestURL;
   var resultStatus = false;
   var lastResult = "";
   var verif = "";
   var idItem = "2";
-  // var verif2 = "";
-  // var interface_version = "";
 
   Quagga.onDetected(function(result) {
     var code = result.codeResult.code;
     var track = Quagga.CameraAccess.getActiveTrack();
-    track.applyConstraints({ advanced: [{ torch: true }] });
+
     if (App.lastResult !== code) {
       App.lastResult = code;
 
@@ -421,7 +453,9 @@ $(document).ready(function() {
             indice = indice.toUpperCase();
             var allerg = prod.allergens;
             var brand = prod.brands_tags[0];
-
+            var nutrim = prod.nutriments;
+            var prot = nutrim.proteins;
+            var ingredients = prod.ingredients_text_fr;
             console.log(prod);
             console.log(prod.product_name);
             string += [`<div id='text'>`];
@@ -431,14 +465,20 @@ $(document).ready(function() {
             string += [` </div>`];
             string += [`</div> <br />`];
             string += [`<div id="desc">`];
-            string += [`<p><strong>Catégorie:</strong> ${prod.categories}<p>`];
-            string += [`<p><strong>Code barre: </strong> ${code}</p>`];
             if (indice.length > 0) {
-              string += [`<p>Indice de qualité : <span>${indice}</span></p>`];
+              string += [
+                `<p><strong>Indice de qualité</strong> : ${indice}</p>`
+              ];
             }
-            string += [
-              `<p><strong>Ingrédients:</strong> ${prod.ingredients_text_fr}</p>`
-            ];
+            string += [`<p><strong>Protéines:</strong> ${prot}<p>`];
+            string += [`<p><strong>Code barre: </strong> ${code}</p>`];
+            if (ingredients.length > 30) {
+              string += [
+                `<p class="text-center"><strong>Ingrédients:</strong> <span style="font-size:12px;text-align:justify;line-height:0.1;">${ingredients}</span></p>`
+              ];
+            } else {
+              string += [`<p><strong>Ingrédients:</strong> ${ingredients}</p>`];
+            }
             if (allerg.length > 0) {
               string += [
                 `<p><strong>Allergènes ou intolérances:</strong> ${allerg}</p><br />`
@@ -533,13 +573,40 @@ $(document).ready(function() {
 
       $("#listes-row").fadeIn(400);
 
-      $(".viewport,#prodname").removeClass("on up");
-      // $(".viewport").animate({
-      //   opacity : 0
+      $(".viewport")
+        .css("display", "none")
+        .animate(
+          {
+            opacity: 0
+          },
+          0
+        );
 
-      // });
-      $(".viewport").css({ opacity: 0 });
+      $("#prodname").removeClass("on up");
       $("#prodname").empty();
+      $("#flash").css({
+        display: "none"
+      });
+
+      $("circle.circle").animate(
+        {
+          opacity: 0
+        },
+        0
+      );
+
+      $("path.thunder").animate(
+        {
+          opacity: 0
+        },
+        0
+      );
+
+      $("#errorMess").css({
+        display: "none",
+        opacity: 0
+      });
+
       Quagga.stop();
     }
   });
@@ -594,14 +661,47 @@ $(document).ready(function() {
       "open openM openS openT"
     );
     $("#scan-row,#frigo-stream-row,#listes-row,#recettes-row").fadeOut("fast");
-    $(".viewport")
+    $(".viewport").animate(
+      {
+        opacity: 1
+      },
+      2000
+    );
+
+    $(".viewport").css("display", "block");
+
+    $("#Calque_1")
       .addClass("on")
+      .css("display", "block")
       .animate(
         {
           opacity: 1
         },
         2000
       );
+
+    $("#flash").css("display", "block");
+
+    $("circle.circle").animate(
+      {
+        opacity: 0.5
+      },
+      2000
+    );
+
+    $("path.thunder").animate(
+      {
+        opacity: 1
+      },
+      2000
+    );
+
+    setTimeout(function() {
+      $("#errorMess").css({
+        display: "block",
+        opacity: 1
+      });
+    }, 2000);
 
     App.init();
   });
