@@ -1,23 +1,7 @@
-/*var scanRow = document.getElementById("scan-row");
-var textRow = document.getElementById("scan-text");
-var logo = document.getElementById("logo");
 
-scanRow.addEventListener("click", scan);
 
-logo.addEventListener("click", function() {
-  /*scanRow.innerHTML =
-    "<div id='scan-1-container'>\
-<p id='scan-text'>Scanner un produit</p>\
-</div>";
-  document.location.href = "index.html";
-});
 
-function scan() {
-  console.log("clicked");
 
-  scanRow.removeEventListener("click", scan);
-}
-*/
 
 window.addEventListener("load", async e => {
   if ("serviceWorker" in navigator) {
@@ -441,6 +425,17 @@ $(document).ready(function() {
               500
             );
 
+            // $("#prodname").velocity({
+            // p:  {
+            //     top :"75%",
+            //     opacity : "1"
+            //   },
+            // o:{ duration: 500}
+            // }
+            // );
+
+           
+
             // $("#prodname").empty();
 
             lastResult = code;
@@ -470,7 +465,24 @@ $(document).ready(function() {
                 `<p><strong>Indice de qualité</strong> : ${indice}</p>`
               ];
             }
-            string += [`<p><strong>Protéines:</strong> ${prot}<p>`];
+
+            function nutString(string){
+
+              if (string > 0){
+                return `<strong>${Object.getOwnPropertyNames(nutrim['energy'])}:</strong> ${string}g, `;
+              }
+              else{
+               return "";
+              }
+
+              // un objet semblable à un tableau
+// var obj = { 0 : "a", 1 : "b", 2 : "c"};
+// console.log(Object.keys(obj));
+// affichera ['0', '1', '2']
+
+            }
+           
+            string += [`<p>${nutString(nutrim.proteins)}${nutString(nutrim.energy)}${nutString(nutrim.calcium)}<p>`];
             string += [`<p><strong>Code barre: </strong> ${code}</p>`];
             if (ingredients.length > 30) {
               string += [
@@ -726,4 +738,6 @@ $(document).ready(function() {
 
     alert("Listes de course");
   });
+
+// $("UI-LOG")
 });

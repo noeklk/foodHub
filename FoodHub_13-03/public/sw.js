@@ -4,6 +4,7 @@ const staticAssets = [
   "./assets/js/main.js",
   "./assets/css/styles.css",
   "./assets/js/jquery-3.3.1.min.js",
+  "./assets/js/velocity.min.js",
   "./assets/fonts/Sansation_Regular.ttf",
   "./assets/fonts/Sansation_Bold.ttf",
   "./assets/css/all.min.css",
