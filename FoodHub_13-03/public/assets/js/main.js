@@ -434,7 +434,7 @@ $(document).ready(function() {
             // }
             // );
 
-           
+
 
             // $("#prodname").empty();
 
@@ -466,23 +466,36 @@ $(document).ready(function() {
               ];
             }
 
-            function nutString(string){
+            function nutString(){
 
-              if (string > 0){
-                return `<strong>${Object.getOwnPropertyNames(nutrim['energy'])}:</strong> ${string}g, `;
-              }
-              else{
-               return "";
-              }
+              string += `<p id="nutrimClass">`;
 
-              // un objet semblable à un tableau
-// var obj = { 0 : "a", 1 : "b", 2 : "c"};
-// console.log(Object.keys(obj));
-// affichera ['0', '1', '2']
+              var entries = Object.entries(nutrim);
+              // var keys = Object.keys(nutrim);
+              // var values = Object.values(nutrim);
 
-            }
-           
-            string += [`<p>${nutString(nutrim.proteins)}${nutString(nutrim.energy)}${nutString(nutrim.calcium)}<p>`];
+              entries.forEach(function(entry){
+
+                let key = entry[0];
+                let value = entry[1];
+
+                if (value > 0){
+
+                  // return `<strong>${key}:</strong> ${value}`;
+                  string  +=`<strong>${key}:</strong> ${value}, `;
+
+                }
+                else{
+                  string += '';
+                }
+              });
+
+              string += `</p>`;
+
+               }
+              //  ${nutString(nutrim.proteins)}${nutString(nutrim.energy)}${nutString(nutrim.calcium)}
+            nutString();
+            // string += [`<p>${nutString()}<p>`];
             string += [`<p><strong>Code barre: </strong> ${code}</p>`];
             if (ingredients.length > 30) {
               string += [
