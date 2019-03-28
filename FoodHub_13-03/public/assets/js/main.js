@@ -525,11 +525,33 @@ $(document).ready(function() {
 							var entries = Object.entries(nutrim);
 							// var keys = Object.keys(nutrim);
 							// var values = Object.values(nutrim);
+							var entriesProd = Object.entries(prod);
+
+							entriesProd.forEach(function(entry){
+
+								var key1 = entry[0];
+								var value1 = entry[1];
+								
+
+								if (value1){
+									console.log(`${key1} == ${value1}`);
+									switch(key1){
+
+										case "origins_fr":
+											string += `<p class="nutrimClass"><strong>Provenance:</strong> ${value1}</p>`;
+											break;
+										default:
+											break;
+									}
+								}
+
+							})
 
 							entries.forEach(function(entry) {
 								var key = entry[0];
 								var value = entry[1];
 								var cValue = Number(value);
+								
 
 								if (cValue > 0) {
 									console.log(`${key} == ${cValue}`);
