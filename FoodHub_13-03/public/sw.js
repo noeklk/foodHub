@@ -12,7 +12,10 @@ const staticAssets = [
   "./assets/js/popper.min.js",
   "./assets/webfonts/fa-solid-900.woff2",
   "./assets/webfonts/fa-regular-400.woff2",
-  "./assets/webfonts/fa-brands-400.woff2"
+  "./assets/webfonts/fa-brands-400.woff2",
+  "./assets/js/tipso.min.js",
+  "./assets/css/tipso.min.css",
+  "./assets/css/animate.css"
 ];
 
 self.addEventListener("install", async event => {
