@@ -475,6 +475,7 @@ $(document).ready(function() {
 						var nova = prod.nova_group;
 						console.log(prod);
 						console.log(prod.product_name);
+
 						string += [`<div id='text'>`];
 						string += [`<h1>${prod.product_name}</h1>`];
 						string += [`<div id="brand-inline">`];
@@ -588,10 +589,16 @@ $(document).ready(function() {
 						string += [`</div>`];
 
 						var imgArticle = [`<img class="img" src="${prod.image_url}" />`];
+
 						$("#prodname").html(imgArticle + string);
 						$("#prodname").prepend("<hr />");
 						$("#desc").prepend("<hr />");
+						if(prod.product_name.length > 13){
+							$("#text > h1").css({
+								fontSize:"30px"
+							})
 
+						}
 						// $("#nova_svg").attr({
 						// 	tipso: "yooooAAAAAAAAAAA",
 						// 	"data-tipso-title": "nova"

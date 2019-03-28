@@ -577,12 +577,13 @@ main {
 	margin: 0;
 	font-weight: bold;
 	position: relative;
+	font-size : 40px;
 
 	text-align: center;
 }
 
 #prodname > #text > #brand-inline {
-	max-width: 70%;
+	width: 70%;
 	background-color: white;
 	border-radius: 10px 5px 10px 5px;
 	padding: 0;
@@ -590,9 +591,9 @@ main {
 	left: 50%;
 	transform: translateX(-50%);
 
-	position: relative;
+	position: absolute;
 
-	margin-top: 10px;
+	margin-top: 5px;
 }
 
 #prodname > #text > #brand-inline > #brand {
@@ -675,13 +676,15 @@ main {
 	-webkit-perspective: 1000;
 	perspective: 1000;
 
-	top: 10.5%;
-	transform: translateY(-10.5%);
-	left: 27%;
-	transform: translateX(-27%);
+	top: 10%;
+	transform: translateY(-10%);
+	right: 50%;
+	transform:translateX(50%);
+	
 }
 
 #nova_svg {
+	text-decoration: none;
 	position: absolute;
 	left: 50px;
 	-webkit-perspective: 1000;
